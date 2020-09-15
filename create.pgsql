@@ -8,17 +8,17 @@ create table weight (
     value SMALLINT NOT NULL
 )
 
-SELECT * from weight;
+SELECT * from weight WHERE full_name like '%Gio%'
 
 /* pull data */
 INSERT INTO weight(full_name, gender, date_of_test, value)
-VALUES('Giovanny Carreño', 'Male', DATE '2020-08-01', 75);
+VALUES('Giovanny Carreño', 'Male', DATE '2020-09-01', 76.6);
 
 INSERT INTO weight(full_name, gender, date_of_test, value)
-VALUES('Luis Carreño', 'Male', DATE '2020-08-01', 67);
+VALUES('Luis Carreño', 'Male', DATE '2020-09-01', 66.4);
 
 INSERT INTO weight(full_name, gender, date_of_test, value)
-VALUES('Danna Carreño', 'Female', DATE '2020-08-01', 75);
+VALUES('Danna Carreño', 'Female', DATE '2020-09-01', 65.5);
 
 INSERT INTO weight(full_name, gender, date_of_test, value)
-VALUES('Marlene Ortiz', 'Female', DATE '2020-08-01', 75);
+VALUES('Marlene Ortiz', 'Female', DATE '2020-09-01', 84.4);
