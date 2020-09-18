@@ -22,3 +22,5 @@ VALUES('Danna Carreño', 'Female', DATE '2020-09-01', 65.5);
 
 INSERT INTO weight(full_name, gender, date_of_test, value)
 VALUES('Marlene Ortiz', 'Female', DATE '2020-09-01', 84.4);
+
+SELECT * from person;
