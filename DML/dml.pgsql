@@ -82,3 +82,42 @@ SELECT car_uid FROM person;
 SELECT car_uid FROM car
 INTERSECT
 SELECT car_uid FROM person;
+
+/*Unión natural*/ 
+SELECT *
+FROM car INNER JOIN person
+ON person.car_uid=car.car_uid;
+
+/*Unión natural (Left)*/ 
+SELECT *
+FROM car LEFT JOIN person
+ON person.car_uid=car.car_uid;
+
+/*Unión natural (Rigth)*/ 
+SELECT *
+FROM car RIGHT JOIN person
+ON person.car_uid=car.car_uid;
+
+/*Unión natural (ALL JOIN)*/ 
+SELECT *
+FROM car FULL OUTER JOIN person
+ON person.car_uid=car.car_uid;
+
+
+/*Unión natural (Interna)*/ 
+SELECT *
+FROM car INNER JOIN person
+ON person.car_uid=car.car_uid;
+
+
+/*Funciones de agrupación*/
+-- GROUP BY
+-- ORDER BY
+SELECT language,
+count(language) AS Count,
+avg(price) AS media,
+min(price) AS min_price,
+max(price) AS "max_price"
+FROM movies
+GROUP BY language
+ORDER BY media ASC;
