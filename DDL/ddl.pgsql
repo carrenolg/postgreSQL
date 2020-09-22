@@ -142,11 +142,3 @@ INSERT INTO invoices (date, client_id, product_no, quantity)
 VALUES (DATE '2020-09-19', 0315, 3, 5);
 
 SELECT * FROM invoices;
-
-/*Sentencias de modificación*/
-ALTER TABLE weight
-ADD COLUMN time_of_test TIME;
-
---SELECT * FROM weight;
---UPDATE weight SET time_of_test = '08:00 PM'
---WHERE date_of_test > date('2020-08-01 00:00:00');
