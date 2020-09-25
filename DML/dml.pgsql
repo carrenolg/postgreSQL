@@ -168,11 +168,69 @@ WHERE price > ALL   (
 );
 
 /*INSERT*/
+SELECT * from student WHERE id = 1;
+SELECT * FROM courses;
+SELECT * FROM student_course;
+
+/*
+CREATE TABLE student_course (
+    id SMALLSERIAL,
+    student_id BIGINT REFERENCES student (id),
+    course_id SMALLINT REFERENCES courses (course_id),
+    PRIMARY KEY (student_id, course_id)
+);
+*/
+
+INSERT INTO courses (course_name, field) values ('Web', 'Computer');
+
+-- Indivudual INSERT
+INSERT INTO student_course (student_id, course_id) values (2, 1);
+
+-- Multiple INSERT
+INSERT INTO student_course (student_id, course_id)
+SELECT 450 AS "student", course_id
+FROM courses WHERE field = 'Computer';
+
+-- Example
+-- get all students enrroled in all engineering courses
+-- amount engineering courses = 4
+SELECT student_id, count(*)
+FROM student_course
+WHERE course_id = ANY (
+    SELECT course_id FROM courses WHERE field = 'Inge'
+) GROUP BY student_id HAVING count(*) = 4;
+
+SELECT * FROM movies;
+
+-- Specify atributes
+INSERT INTO movies (title, price)
+VALUES ('Santa Teresita - Pelicula', 8500);
+
+-- Without specify atributes
+INSERT INTO movies
+values (1001, 'San Juan Pablo II', 'Documentary', 9600, 'Peso', 'English');
 
 
+/*DELETE*/
+SELECT * FROM movies WHERE currency = 'Euro';
+-- Simple
+DELETE FROM movies
+WHERE currency = 'Euro';
+
+-- Using Sub-query
+DELETE FROM movies
+WHERE price > ALL (
+    SELECT price FROM movies WHERE language='Dutch'
+);
 
 
+/*UPDATE*/
+UPDATE movies
+SET language = 'English-USA'
+WHERE language='English';
 
+-- Updating all registers
+UPDATE movies
+SET price = (price * 1.2);
 
-
-
+SELECT * FROM movies;
