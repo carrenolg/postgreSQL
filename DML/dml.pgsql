@@ -121,3 +121,58 @@ max(price) AS "max_price"
 FROM movies
 GROUP BY language
 ORDER BY media ASC;
+
+
+/*SUB-Query*/
+
+SELECT alfa.*
+FROM (
+    SELECT
+    title AS "movie_title",
+    genre AS "movie_genre",
+    price AS "movie_price"
+    FROM movies WHERE genre = 'Comedy'
+) AS alfa
+WHERE alfa.movie_price > 5.0;
+
+-- Sub-query II
+SELECT alfa.*
+FROM (
+    SELECT *,
+    price AS "movie_price"
+    FROM movies WHERE genre = 'Comedy'
+) AS alfa
+WHERE alfa.movie_price > 5.0;
+
+
+/*Operadores especiales*/
+-- IN
+-- ANY
+-- ALL
+SELECT * FROM movies
+WHERE genre IN ('Comedy', 'Drama', 'Sci-Fi');
+
+SELECT * FROM movies
+WHERE genre = ANY (
+    SELECT genre FROM movies WHERE currency = 'Dollar'
+);
+
+SELECT * FROM movies
+WHERE price > ALL (
+    SELECT price FROM movies WHERE currency = 'Euro'
+);
+
+SELECT * FROM movies
+WHERE price > ALL   (
+    SELECT price FROM movies WHERE currency = 'Euro'
+);
+
+/*INSERT*/
+
+
+
+
+
+
+
+
