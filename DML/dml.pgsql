@@ -2,8 +2,8 @@
 
 -- ADD
 
-ALTER TABLE weight
-ADD COLUMN time_of_test TIME;
+--ALTER TABLE weight
+--ADD COLUMN time_of_test TIME;
 
 SELECT * FROM weight;
 UPDATE weight SET time_of_test = '08:00 PM'
