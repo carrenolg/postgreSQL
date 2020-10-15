@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION check_application()
+    RETURNS TRIGGER
+    LANGUAGE 'plpgsql'
+    AS
+$$
+DECLARE
+-- variable declaration
+-- id_application integer;
+status application.app_status % TYPE;
+
+BEGIN
+    -- logic
+    SELECT app_status INTO status
+    FROM application
+    WHERE code=1;
+
+    IF app_status = 'Reprobe' THEN
+        RAISE NOTICE 'No se puede realizar el registro del Plan de Manejo Forestal con la solicitud %', app_status;
+    END IF;
+
+    RETURN NULL;
+END;
+$$

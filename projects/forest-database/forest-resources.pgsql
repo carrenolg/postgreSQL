@@ -161,3 +161,60 @@ CREATE TABLE application (
 );
 
 SELECT * FROM application;
+
+CREATE TABLE forestryplan (
+   code INTEGER NOT NULL,
+   employee_id INTEGER NOT NULL,
+   engineer_id INTEGER NOT NULL,
+   application_code INTEGER NOT NULL,
+   registry_number CHARACTER(25) NOT NULL,
+   date date NOT NULL,
+   comment TEXT NOT NULL,
+   CONSTRAINT PK_forestryplan PRIMARY KEY (code),
+   CONSTRAINT FK_Person_Employee_Forestryplan FOREIGN KEY (employee_id)
+   REFERENCES employee (identification) MATCH SIMPLE
+   ON UPDATE NO ACTION
+   ON DELETE NO ACTION,
+   CONSTRAINT FK_Person_Engineer_Forestryplan FOREIGN KEY (engineer_id)
+   REFERENCES engineer (identification) MATCH SIMPLE
+   ON UPDATE NO ACTION
+   ON DELETE NO ACTION,
+   CONSTRAINT FK_Application_Forestryplan FOREIGN KEY (application_code)
+   REFERENCES application (code) MATCH SIMPLE
+   ON UPDATE NO ACTION
+   ON DELETE NO ACTION
+);
+
+SELECT * FROM forestryplan;
+
+CREATE TABLE include (
+   forestryplan_code INTEGER NOT NULL,
+   species_code CHARACTER(15) NOT NULL,
+   quantity DOUBLE PRECISION NOT NULL,
+   CONSTRAINT PK_Include PRIMARY KEY (forestryplan_code, species_code),
+   CONSTRAINT FK_Forestryplan_Include FOREIGN KEY (forestryplan_code)
+   REFERENCES forestryplan (code) MATCH SIMPLE
+   ON UPDATE NO ACTION
+   ON DELETE NO ACTION,
+   CONSTRAINT FK_Species_Include FOREIGN KEY (species_code)
+   REFERENCES species (code) MATCH SIMPLE
+   ON UPDATE NO ACTION
+   ON DELETE NO ACTION
+);
+
+SELECT * FROM include;
+
+SELECT * FROM district;
+
+INSERT INTO district (code, name)
+values (3, 'Alameda La Victoria');
+
+SELECT * FROM district;
+
+SELECT * FROM application;
+
+CALL showrow(1);
+
+SELECT check_application();
+
+drop function check_application();
