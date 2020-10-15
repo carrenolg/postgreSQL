@@ -209,12 +209,23 @@ SELECT * FROM district;
 INSERT INTO district (code, name)
 values (3, 'Alameda La Victoria');
 
-SELECT * FROM district;
+-- INSERT data into the application table
+INSERT INTO person
+values (1010,'RUT','Danna', 'Ortiz',6690457);
 
-SELECT * FROM application;
+INSERT INTO employee
+values (1010, 'Woman', 'RH+');
 
-CALL showrow(1);
+INSERT INTO state
+values ('S14', 1, 'State 14', 15.5);
 
-SELECT check_application();
+INSERT INTO application
+values (1, NULL, 1010, 1010, DATE '15-10-2020', 'S14', 15.5, 5, 25.8, 'Renew', 30, 'Reprobe', TRUE);
 
-drop function check_application();
+INSERT INTO engineer
+values (1010, 'AC10005');
+
+-- Testing new trigger
+
+INSERT INTO forestryplan
+values (1, 1010, 1010, 1, 'REG1005', DATE '15-10-2020', 'New forest plan');

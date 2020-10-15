@@ -21,3 +21,26 @@ begin
 
     commit;
 end;$$
+
+
+CREATE OR REPLACE PROCEDURE public.showrow(id integer)
+ LANGUAGE plpgsql
+AS $procedure$
+begin
+    /*-- subtracting the amount from the sender's account 
+    update accounts 
+    set balance = balance - amount 
+    where id = sender;
+
+    -- adding the amount to the receiver's account
+    update accounts 
+    set balance = balance + amount 
+    where id = receiver;*/
+
+    --SELECT * FROM district WHERE code=id;
+    UPDATE district
+    set name = 'C2000'
+    WHERE code=id;
+
+    commit;
+end;$procedure$

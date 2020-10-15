@@ -1,23 +1,26 @@
-CREATE OR REPLACE FUNCTION check_application()
-    RETURNS TRIGGER
-    LANGUAGE 'plpgsql'
-    AS
+CREATE OR REPLACE FUNCTION check_status_application()
+  RETURNS TRIGGER 
+  LANGUAGE PLPGSQL  
+  AS
 $$
-DECLARE
--- variable declaration
--- id_application integer;
-status application.app_status % TYPE;
-
+DECLARE STATUS application.app_status % TYPE;
 BEGIN
-    -- logic
-    SELECT app_status INTO status
+    SELECT application.app_status INTO STATUS
     FROM application
-    WHERE code=1;
+    WHERE application.code = NEW.application_code;
 
-    IF app_status = 'Reprobe' THEN
-        RAISE NOTICE 'No se puede realizar el registro del Plan de Manejo Forestal con la solicitud %', app_status;
-    END IF;
+	IF STATUS='Reprobe' THEN
+        RAISE EXCEPTION '% No se puede realizar el registro del Plan de Manejo Forestal con la solicitud Derogada', NEW.application_code;
+	END IF;
 
-    RETURN NULL;
+	RETURN NEW;
 END;
 $$
+
+-- Bind to the table
+
+CREATE TRIGGER insert_update_forestryplan
+  BEFORE INSERT OR UPDATE
+  ON forestryplan
+  FOR EACH ROW
+  EXECUTE PROCEDURE check_status_application();
